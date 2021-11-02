@@ -11,7 +11,7 @@ public class OnlinerTest extends ConfigureClass {
 
     @Parameters({"manufacturer", "maximumPrice", "minScreenSize", "maxScreenSize", "resolution"})
     @Test
-    public void enterCatalogPage(String manufacturer, String maximumPrice, String minScreenSize, String maxScreenSize, String resolution){
+    public void test(String manufacturer, String maximumPrice, String minScreenSize, String maxScreenSize, String resolution){
         MainPage mainPage = new MainPage(driver);
         CatalogPage catalogPage = new CatalogPage(driver);
         TVPage tvPage = new TVPage(driver, (JavascriptExecutor) driver);
