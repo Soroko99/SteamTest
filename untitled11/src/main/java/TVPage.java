@@ -4,12 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TVPage extends ConfigureClass {
+public class TVPage {
     WebDriver driver;
 
     public TVPage(WebDriver driver, JavascriptExecutor js) {
@@ -19,7 +18,6 @@ public class TVPage extends ConfigureClass {
 
     public JavascriptExecutor js;
     public Select selectSize;
-
     protected String manufacturerFilterXpath = "//input[@value='%s']//ancestor::label";
     protected String priceFiltrationXpath = "//input[contains(@placeholder, '%s')]";
     protected String resolutionXpath = "//span[contains(text(), '%s')]/parent::label";

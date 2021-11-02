@@ -1,17 +1,13 @@
 import org.openqa.selenium.JavascriptExecutor;
-import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class OnlinerTest extends ConfigureClass {
 
-    protected static String mainUrl = "https://www.onliner.by/";
-    protected String catalogExpectedTitle = "Каталог Onlíner";
-    protected String tvExpectedTitle = "Телевизор купить в Минске";
+    protected String manufacturerXpath = "//span[starts-with(text(),'Телевизор')]";
     protected String priceXpath = "//span[contains(@data-bind,'BYN')]";
     protected String screenSizeXpath = "//span[contains(@data-bind, 'description')]";
     protected String resolutionXpath = "//span[contains(@data-bind, 'description')]";
-    protected String manufacturerXpath = "//span[starts-with(text(),'Телевизор')]";
 
     @Parameters({"manufacturer", "maximumPrice", "minScreenSize", "maxScreenSize", "resolution"})
     @Test
@@ -19,15 +15,14 @@ public class OnlinerTest extends ConfigureClass {
         MainPage mainPage = new MainPage(driver);
         CatalogPage catalogPage = new CatalogPage(driver);
         TVPage tvPage = new TVPage(driver, (JavascriptExecutor) driver);
-        driver.get(mainUrl);
 
         mainPage.topNavigationChoice("Каталог");
-        Assert.assertEquals(driver.getTitle(), catalogExpectedTitle);
+        mainPage.catalogTitleAssertion();
 
         catalogPage.catalogSubsectionChoice("Электроника");
         catalogPage.electronicsSubsectionChoice("Телевидение");
         catalogPage.productChoice("Телевизоры");
-        Assert.assertEquals(driver.getTitle(), tvExpectedTitle);
+        catalogPage.tvTitleAssertion();
 
         tvPage.manufacturerFiltration(manufacturer);
         tvPage.priceFiltration("до", maximumPrice);
@@ -35,11 +30,7 @@ public class OnlinerTest extends ConfigureClass {
         tvPage.screenSizeFiltration("from", minScreenSize);
         tvPage.screenSizeFiltration("to", maxScreenSize);
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        sleep();
 
         tvPage.manufacturerValidation(tvPage.generatingTvCharacteristicsList(driver, manufacturerXpath), manufacturer);
         tvPage.maxPriceValidation(tvPage.generatingTvCharacteristicsList(driver, priceXpath), maximumPrice);
