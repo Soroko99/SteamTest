@@ -9,7 +9,7 @@ import pages.SteamDownload;
 public class SteamTest extends BaseTest {
 
     @Test
-    public void start() throws InterruptedException {
+    public void start(){
         HomePage homePage = new HomePage();
         homePage.getLanguage();
         homePage.isRightPageOpenedAssertion();
