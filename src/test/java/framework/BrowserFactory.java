@@ -13,11 +13,11 @@ import java.util.HashMap;
 public class BrowserFactory{
 
     public  static WebDriver createDriver(){
-        WebDriver driver = null;
         PropertyManager propertyManager = new PropertyManager();
         String browser = propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "browser");
-        switch (browser){
-            case "chrome":
+        WebDriver driver = null;
+        switch (browser) {
+            case "chrome" -> {
                 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
                 chromePrefs.put("profile.default_content_settings.popups", 0);
                 chromePrefs.put("safebrowsing.enabled", "true");
@@ -25,8 +25,8 @@ public class BrowserFactory{
                 options.setExperimentalOption("prefs", chromePrefs);
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver(options);
-                break;
-            case "firefox":
+            }
+            case "firefox" -> {
                 FirefoxProfile profile = new FirefoxProfile();
                 profile.setPreference("browser.download.folderList", 2);
                 profile.setPreference("browser.download.dir", propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "steam_save_dir"));
@@ -34,9 +34,8 @@ public class BrowserFactory{
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver(firefoxOptions.setProfile(profile));
-                break;
-            default:
-                Assert.fail(browser + " " + "нет такого драйвера!(");
+            }
+            default -> Assert.fail(browser + " " + "нет такого драйвера!(");
         }
         return driver;
     }
