@@ -13,10 +13,9 @@ import java.util.HashMap;
 public class BrowserFactory{
 
     public  static WebDriver createDriver(){
-        String browser;
         WebDriver driver = null;
         PropertyManager propertyManager = new PropertyManager();
-        browser = propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "browser");
+        String browser = propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "browser");
         switch (browser){
             case "chrome":
                 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
