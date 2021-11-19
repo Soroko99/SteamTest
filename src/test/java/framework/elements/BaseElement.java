@@ -29,7 +29,7 @@ public class BaseElement{
             ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='3px solid red'", element);
         }
         element.click();
-    };
+    }
 
     public void waitForIsElementPresent(By locator){
         element = driver.findElement(locator);

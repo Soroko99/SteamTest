@@ -35,7 +35,7 @@ public class BrowserFactory{
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver(firefoxOptions.setProfile(profile));
             }
-            default -> Assert.fail(browser + " " + "нет такого драйвера!(");
+            default -> Assert.fail(browser + " " + "driver is absent(");
         }
         return driver;
     }

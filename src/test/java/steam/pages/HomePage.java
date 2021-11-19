@@ -1,5 +1,6 @@
-package pages;
+package steam.pages;
 
+import framework.BasePage;
 import framework.PropertyManager;
 import framework.elements.Button;
 import framework.elements.Dropdown;
@@ -15,18 +16,14 @@ import java.util.List;
 import static framework.PropertyManager.engLangPropertyPath;
 import static framework.PropertyManager.ruLangPropertyPath;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
     public static String currentLanguagePropertyPath;
-    private String subsectionBtnXpath = "//a[@class='popup_menu_item'][contains(text(),'%s')]";
-    private String mainMenuXpath = "//a[@class='pulldown_desktop'][contains(text(), '%s')]";
-    private String changeLanguageBtnXpath = "//a[@class='popup_menu_item tight'][contains(text(), '%s')]";
-    private String openLanguageListBtnXpath = "//span[@id='language_pulldown']";
-    private String languageBtnXpath = "//a[@class='popup_menu_item tight'][contains(text(), '%s')]";
     PropertyManager propertyManager = new PropertyManager();
+
 
     public boolean checkIfLanguageExist(String currentTestLanguage){
         boolean bool = false;
-        List<WebElement> languageList = driver.findElements(By.xpath(String.format(languageBtnXpath, currentTestLanguage)));
+        List<WebElement> languageList = driver.findElements(By.xpath(String.format("//a[@class='popup_menu_item tight'][contains(text(), '%s')]", currentTestLanguage)));
         for(WebElement element : languageList){
             if (element.getText().startsWith(currentTestLanguage)){
                 bool = true;
@@ -37,10 +34,10 @@ public class HomePage extends BasePage{
     }
 
     public String getLanguage() {
-        Button openLanguageListBtn = new Button(By.xpath(openLanguageListBtnXpath));
+        Button openLanguageListBtn = new Button(By.xpath("//span[@id='language_pulldown']"));
         openLanguageListBtn.click();
         String currentTestLanguage = propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "language");
-        Dropdown selectLanguageDropdown = new Dropdown(By.xpath(String.format(changeLanguageBtnXpath, currentTestLanguage)));
+        Dropdown selectLanguageDropdown = new Dropdown(By.xpath(String.format("//a[@class='popup_menu_item tight'][contains(text(), '%s')]", currentTestLanguage)));
         if (currentTestLanguage.equals("Русский")){
             if (checkIfLanguageExist(currentTestLanguage)) {
                 currentLanguagePropertyPath = ruLangPropertyPath;
@@ -65,7 +62,6 @@ public class HomePage extends BasePage{
     }
 
     public void waitForPageIsLoaded(){
-
         JavascriptExecutor js = (JavascriptExecutor) driver;
         WebDriverWait wait = new WebDriverWait(driver, Integer.parseInt(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "explicit_wait")));
         try{
@@ -84,21 +80,19 @@ public class HomePage extends BasePage{
     }
 
     @Override
-    public void isRightPageOpenedAssertion() {
+    public void isRightPageOpenedAssertion(String currentTitle) {
         waitForPageIsLoaded();
-        Assert.assertEquals(driver.getTitle(), propertyManager.getExactProperty(currentLanguagePropertyPath, "home_title"));
+        Assert.assertEquals(driver.getTitle(), currentTitle);
     }
 
-    public void mainLabelNavigation() {
+    public void mainLabelNavigation(String mainLabelText) {
         Actions actions = new Actions(driver);
-        String mainLabelText = propertyManager.getExactProperty(currentLanguagePropertyPath, "main_page_top_navigation");
-        WebElement mainLabelElement = driver.findElement(By.xpath(String.format(mainMenuXpath, mainLabelText)));
+        WebElement mainLabelElement = driver.findElement(By.xpath(String.format("//a[@class='pulldown_desktop'][contains(text(), '%s')]", mainLabelText)));
         actions.moveToElement(mainLabelElement).build().perform();
     }
 
-    public void subsectionChoice(){
-        String subsectionText = propertyManager.getExactProperty(currentLanguagePropertyPath, "main_page_top_nav_subsection");
-        Dropdown subsectionDropdown = new Dropdown(By.xpath(String.format(subsectionBtnXpath, subsectionText)));
+    public void subsectionChoice(String subsectionText){
+        Dropdown subsectionDropdown = new Dropdown(By.xpath(String.format("//a[@class='popup_menu_item'][contains(text(),'%s')]", subsectionText)));
         subsectionDropdown.click();
     }
 

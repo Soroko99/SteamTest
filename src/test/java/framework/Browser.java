@@ -1,6 +1,8 @@
 package framework;
 
 import org.openqa.selenium.WebDriver;
+
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import static framework.BrowserFactory.createDriver;
 
