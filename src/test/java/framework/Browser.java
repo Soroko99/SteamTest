@@ -1,8 +1,6 @@
 package framework;
 
 import org.openqa.selenium.WebDriver;
-
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import static framework.BrowserFactory.createDriver;
 
@@ -19,8 +17,13 @@ public class Browser{
     public void setup(){
         driver = createDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(Integer.parseInt(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "implicit_wait")), TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "implicit_wait")), TimeUnit.SECONDS);
         driver.get(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "main_url"));
+    }
+
+    public void driverGet(String url){
+        driver.get(url);
     }
 
 }

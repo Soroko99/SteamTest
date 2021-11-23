@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -23,6 +24,10 @@ public class BaseElement{
         this.locator = locator;
     }
 
+    public boolean isDisplayed(){
+        return driver.findElement(locator).isDisplayed();
+    }
+
     public void click() {
         waitForIsElementPresent(locator);
         if (driver instanceof JavascriptExecutor) {
@@ -38,6 +43,15 @@ public class BaseElement{
             System.out.println("Bad news");
         }
         Assert.assertTrue(element.isDisplayed());
+    }
+
+    public void moveTo(){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(locator)).build().perform();
+    }
+
+    public String getText(){
+        return driver.findElement(locator).getText();
     }
 
     private boolean isPresent(By locator) {

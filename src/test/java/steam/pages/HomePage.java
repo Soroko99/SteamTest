@@ -5,96 +5,62 @@ import framework.PropertyManager;
 import framework.elements.Button;
 import framework.elements.Dropdown;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import java.util.HashMap;
 import java.util.List;
 
-import static framework.PropertyManager.engLangPropertyPath;
-import static framework.PropertyManager.ruLangPropertyPath;
-
 public class HomePage extends BasePage {
-    public static String currentLanguagePropertyPath;
+
     PropertyManager propertyManager = new PropertyManager();
+    public static String currentLanguagePropertyPath;
+    HashMap<String, String> langMap = new HashMap<>();
+    Button openLanguageListBtn = new Button(By.xpath("//span[@id='language_pulldown']"));
+    Dropdown selectLanguageDropdown = new Dropdown(By.xpath(String.format("//a[@class='popup_menu_item tight'][contains(text(), '%s')]", propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "language"))));
+    List<WebElement> languageList = findElementsList(By.xpath(("//a[@class='popup_menu_item tight']")));
 
-
-    public boolean checkIfLanguageExist(String currentTestLanguage){
-        boolean bool = false;
-        List<WebElement> languageList = driver.findElements(By.xpath(String.format("//a[@class='popup_menu_item tight'][contains(text(), '%s')]", currentTestLanguage)));
-        for(WebElement element : languageList){
-            if (element.getText().startsWith(currentTestLanguage)){
-                bool = true;
-                break;
-            }
-        }
-        return bool;
+    public HashMap<String,String> langList(){
+        langMap.put("Русский", "src/test/resources/locale_properties/ru_properties.properties");
+        langMap.put("English", "src/test/resources/locale_properties/eng_properties.properties");
+        return langMap;
     }
 
-    public String getLanguage() {
-        Button openLanguageListBtn = new Button(By.xpath("//span[@id='language_pulldown']"));
+    public void chooseLanguage(String lang){
         openLanguageListBtn.click();
-        String currentTestLanguage = propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "language");
-        Dropdown selectLanguageDropdown = new Dropdown(By.xpath(String.format("//a[@class='popup_menu_item tight'][contains(text(), '%s')]", currentTestLanguage)));
-        if (currentTestLanguage.equals("Русский")){
-            if (checkIfLanguageExist(currentTestLanguage)) {
-                currentLanguagePropertyPath = ruLangPropertyPath;
-                selectLanguageDropdown.click();
-            }
-            if (!checkIfLanguageExist(currentTestLanguage)) {
-                currentLanguagePropertyPath = ruLangPropertyPath;
-                openLanguageListBtn.click();
-            }
+        if (searchChosenLanguage(lang) && isLanguageProvided(lang))
+        {
+            currentLanguagePropertyPath = langList().get(lang);
+            selectLanguageDropdown.click();
         }
-        if (currentTestLanguage.equals("English")){
-            if (checkIfLanguageExist(currentTestLanguage)) {
-                currentLanguagePropertyPath = engLangPropertyPath;
-                selectLanguageDropdown.click();
-            }
-            if (!checkIfLanguageExist(currentTestLanguage)) {
-                currentLanguagePropertyPath = engLangPropertyPath;
-                openLanguageListBtn.click();
-            }
+        else {
+            currentLanguagePropertyPath = langList().get(lang);
+            openLanguageListBtn.click();
         }
-        return currentLanguagePropertyPath;
     }
 
-    public void waitForPageIsLoaded(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebDriverWait wait = new WebDriverWait(driver, Integer.parseInt(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "explicit_wait")));
-        try{
-            wait.until((ExpectedCondition<Boolean>) (ExpectedCondition<Boolean>) (x) -> {
-                try {
-                    if (js.executeScript("arguments[0].document.readyState") == "complete")
-                        return true;
-                } catch (Exception e) {
-                    return false;
-                }
-                return true;
-            });
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+    public boolean isLanguageProvided(String lang){
+        return langList().containsKey(lang);
     }
+
+    public boolean searchChosenLanguage(String lang){
+            boolean bool = false;
+            for(WebElement element : languageList){
+                if (element.getText().startsWith(lang)){
+                    bool = true;
+                    break;
+                }
+            }
+        return bool;
+        }
 
     @Override
     public void isRightPageOpenedAssertion(String currentTitle) {
-        waitForPageIsLoaded();
+        waitUntilExpectedConditions(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//a[@class='pulldown_desktop'][contains(text(), '%s')]",
+                propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "main_page_top_navigation")))));
         Assert.assertEquals(driver.getTitle(), currentTitle);
     }
 
-    public void mainLabelNavigation(String mainLabelText) {
-        Actions actions = new Actions(driver);
-        WebElement mainLabelElement = driver.findElement(By.xpath(String.format("//a[@class='pulldown_desktop'][contains(text(), '%s')]", mainLabelText)));
-        actions.moveToElement(mainLabelElement).build().perform();
-    }
-
-    public void subsectionChoice(String subsectionText){
-        Dropdown subsectionDropdown = new Dropdown(By.xpath(String.format("//a[@class='popup_menu_item'][contains(text(),'%s')]", subsectionText)));
-        subsectionDropdown.click();
-    }
 
 }
 

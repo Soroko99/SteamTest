@@ -7,8 +7,6 @@ import java.util.Properties;
 
 public class PropertyManager {
 
-    public static String engLangPropertyPath = "src/test/resources/locale_properties/eng_properties.properties";
-    public static String ruLangPropertyPath = "src/test/resources/locale_properties/ru_properties.properties";
     public static String seleniumPropertyPath = "src/test/resources/selenium_properties.properties";
 
     public String getExactProperty(String propertyPath, String propertyName){

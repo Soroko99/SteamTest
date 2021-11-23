@@ -13,4 +13,5 @@ public class Dropdown extends BaseElement{
         Select select = new Select(driver.findElement(locator));
         select.selectByValue(value);
     }
+
 }
