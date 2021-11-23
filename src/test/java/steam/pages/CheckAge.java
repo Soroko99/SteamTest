@@ -11,18 +11,18 @@ public class CheckAge {
     PropertyManager propertyManager = new PropertyManager();
     TextBox checkAgeTextBox = new TextBox(By.xpath("//div[@class='agegate_birthday_desc']"));
     Dropdown inputAgeDropdown = new Dropdown(By.xpath("//select[@name='ageYear']"));
-    Button openPageBtnXpath = new Button(By.xpath(String.format("//span[contains(text(), '%s')]", propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "check_age_open_button_page"))));
 
-    public boolean isAgeCheckPageOpened(){
+    public boolean isAgeCheckPageOpened() {
         try {
             return checkAgeTextBox.isDisplayed();
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             return false;
         }
     }
 
-    public void ageCheckActions(String input_age){
-            inputAgeDropdown.select(input_age);
-            openPageBtnXpath.click();
+    public void ageCheckActions(String input_age, String openPageBtnText) {
+        inputAgeDropdown.select(input_age);
+        Button openPageBtnXpath = new Button(By.xpath(String.format("//span[contains(text(), '%s')]", openPageBtnText)));
+        openPageBtnXpath.click();
     }
 }

@@ -34,7 +34,8 @@ public class SteamTest extends BaseTest {
 
         CheckAge checkAge = new CheckAge();
         if (checkAge.isAgeCheckPageOpened()) {
-            checkAge.ageCheckActions(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "input_age"));
+            checkAge.ageCheckActions(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "input_age"),
+                    propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath,"check_age_open_button_page"));
         }
 
         GamePage gamePage = new GamePage();
