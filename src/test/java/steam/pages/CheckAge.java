@@ -1,6 +1,5 @@
 package steam.pages;
 
-import framework.PropertyManager;
 import framework.elements.Button;
 import framework.elements.Dropdown;
 import framework.elements.TextBox;
@@ -8,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 public class CheckAge {
-    PropertyManager propertyManager = new PropertyManager();
     TextBox checkAgeTextBox = new TextBox(By.xpath("//div[@class='agegate_birthday_desc']"));
     Dropdown inputAgeDropdown = new Dropdown(By.xpath("//select[@name='ageYear']"));
 

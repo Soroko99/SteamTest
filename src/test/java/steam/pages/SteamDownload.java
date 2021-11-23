@@ -28,8 +28,8 @@ public class SteamDownload extends BasePage {
         switch (BrowserFactory.browser) {
             case "chrome" -> {
                 Browser currentBrowser = new Browser();
-                currentBrowser.driverGet("chrome://downloads");
-                waitPercentage();
+                currentBrowser.get("chrome://downloads");
+                waitForProgress();
             }
             case "firefox" -> {
                 waitForSize();
@@ -74,7 +74,7 @@ public class SteamDownload extends BasePage {
         }
     }
 
-    public void waitPercentage(){
+    public void waitForProgress(){
         WebDriverWait wait = new WebDriverWait(driver, Integer.parseInt(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "explicit_wait")));
         try {
             wait.until((ExpectedCondition<Boolean>) (ExpectedCondition<Boolean>) (x) ->  {

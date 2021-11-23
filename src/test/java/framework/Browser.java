@@ -22,7 +22,7 @@ public class Browser{
         driver.get(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "main_url"));
     }
 
-    public void driverGet(String url){
+    public void get(String url){
         driver.get(url);
     }
 
