@@ -17,7 +17,6 @@ public class HomePage extends BasePage {
     public static String currentLanguagePropertyPath;
     HashMap<String, String> langMap = new HashMap<>();
     Button openLanguageListBtn = new Button(By.xpath("//span[@id='language_pulldown']"));
-    Dropdown selectLanguageDropdown = new Dropdown(By.xpath(String.format("//a[@class='popup_menu_item tight'][contains(text(), '%s')]", propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "language"))));
     List<WebElement> languageList = findElementsList(By.xpath(("//a[@class='popup_menu_item tight']")));
 
     public HashMap<String,String> langList(){
@@ -27,6 +26,7 @@ public class HomePage extends BasePage {
     }
 
     public void chooseLanguage(String lang){
+        Dropdown selectLanguageDropdown = new Dropdown(By.xpath(String.format("//a[@class='popup_menu_item tight'][contains(text(), '%s')]", lang)));
         openLanguageListBtn.click();
         if (searchChosenLanguage(lang) && isLanguageProvided(lang))
         {
