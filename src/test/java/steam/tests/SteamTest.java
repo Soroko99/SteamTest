@@ -12,8 +12,8 @@ public class SteamTest extends BaseTest {
     @BeforeTest
     @Override
     public void trashClean() {
-        SteamDownload steamDelete = new SteamDownload();
-        steamDelete.deleteSteamBeforeTest(steamDelete.isFilePresent());
+        SteamDownload steamUninstall = new SteamDownload();
+        steamUninstall.deleteSteamBeforeTest(steamUninstall.isFilePresent());
     }
 
     @Test
@@ -42,8 +42,8 @@ public class SteamTest extends BaseTest {
         gamePage.isRightPageOpenedAssertion(gamePage.getCurrentSale());
         gamePage.installSteamBtnClick(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "install_steam"));
 
-        SteamDownload steamDownload = new SteamDownload();
-        steamDownload.isRightPageOpenedAssertion(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "steam_title"));
-        steamDownload.downloadSteam(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "download_steam"));
+        SteamDownload steamInstall = new SteamDownload();
+        steamInstall.isRightPageOpenedAssertion(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "steam_title"));
+        steamInstall.downloadSteam(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "download_steam"));
     }
 }

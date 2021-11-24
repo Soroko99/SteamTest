@@ -40,7 +40,7 @@ public class BaseElement{
         element = driver.findElement(locator);
         isPresent(locator);
         if(!element.isDisplayed()){
-            System.out.println("Bad news");
+            System.out.println("Element is absent");
         }
         Assert.assertTrue(element.isDisplayed());
     }
