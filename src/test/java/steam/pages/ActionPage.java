@@ -2,10 +2,9 @@ package steam.pages;
 
 import framework.BasePage;
 import framework.elements.ElementsList;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import java.util.List;
 
 public class ActionPage extends BasePage {
 
@@ -18,6 +17,7 @@ public class ActionPage extends BasePage {
         Assert.assertEquals(driver.getTitle(), currentTitle);
     }
 
+    @Step("Choose the biggest profit")
     public void lookingForBiggestSale(){
         int maxSaleInd = 0;
         int maxSale = 0;

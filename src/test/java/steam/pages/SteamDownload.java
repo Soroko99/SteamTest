@@ -5,6 +5,7 @@ import framework.Browser;
 import framework.BrowserFactory;
 import framework.PropertyManager;
 import framework.elements.Button;
+import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -93,6 +94,7 @@ public class SteamDownload extends BasePage {
         }
     }
 
+    @Step("Clicking download button")
     public void downloadSteam(String downloadSteamBtnText){
         Button downloadSteamBtn = new Button(By.xpath(String.format("//a[text()='%s']", downloadSteamBtnText)));
         downloadSteamBtn.click();

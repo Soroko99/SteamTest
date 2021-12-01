@@ -9,14 +9,14 @@ import steam.pages.*;
 
 public class SteamTest extends BaseTest {
 
-    @BeforeTest
+    @BeforeTest(description = "removing SteamSetup.exe")
     @Override
     public void trashClean() {
         SteamDownload steamUninstall = new SteamDownload();
         steamUninstall.deleteSteamBeforeTest(steamUninstall.isFilePresent());
     }
 
-    @Test
+    @Test(description = "Download Steam after some page activities")
     public void start() {
         PropertyManager propertyManager = new PropertyManager();
 

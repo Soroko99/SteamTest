@@ -2,6 +2,7 @@ package steam.main_menu;
 
 import framework.elements.Dropdown;
 import framework.elements.Label;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 public class MainMenu {
@@ -19,6 +20,7 @@ public class MainMenu {
         return subsectionDropdown;
     }
 
+    @Step("Go to Action page")
     public void mainMenuNavigation(Label mainLabel, Dropdown subSectionDropdown){
         mainLabel.moveTo();
         subSectionDropdown.click();

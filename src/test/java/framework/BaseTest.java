@@ -7,15 +7,15 @@ import org.testng.annotations.Listeners;
 @Listeners(TestListener.class)
 public abstract class BaseTest extends Browser {
 
-    @BeforeTest
+    @BeforeTest (description = "removing SteamSetup.exe")
     public abstract void trashClean();
 
-    @BeforeTest
+    @BeforeTest (description = "opening chosen browser")
     public void driverStart(){
         setup();
     }
 
-    @AfterTest
+    @AfterTest (alwaysRun = true)
     public void testCompletion(){
         driverClose();
     }

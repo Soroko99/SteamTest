@@ -5,6 +5,7 @@ import framework.PropertyManager;
 import framework.elements.Button;
 import framework.elements.Dropdown;
 import framework.elements.ElementsList;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,6 +26,7 @@ public class HomePage extends BasePage {
         return langMap;
     }
 
+    @Step("Language choice")
     public void chooseLanguage(String lang){
         Dropdown selectLanguageDropdown = new Dropdown(By.xpath(String.format("//a[@class='popup_menu_item tight'][contains(text(), '%s')]", lang)));
         openLanguageListBtn.click();
