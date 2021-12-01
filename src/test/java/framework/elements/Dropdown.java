@@ -10,7 +10,7 @@ public class Dropdown extends BaseElement{
     }
 
     public void select(String value){
-        Select select = new Select(driver.findElement(locator));
+        Select select = new Select(getElement());
         select.selectByValue(value);
     }
 

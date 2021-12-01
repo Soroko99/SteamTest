@@ -4,12 +4,12 @@ import framework.BasePage;
 import framework.PropertyManager;
 import framework.elements.Button;
 import framework.elements.Dropdown;
+import framework.elements.ElementsList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import java.util.HashMap;
-import java.util.List;
 
 public class HomePage extends BasePage {
 
@@ -17,7 +17,7 @@ public class HomePage extends BasePage {
     public static String currentLanguagePropertyPath;
     HashMap<String, String> langMap = new HashMap<>();
     Button openLanguageListBtn = new Button(By.xpath("//span[@id='language_pulldown']"));
-    List<WebElement> languageList = findElementsList(By.xpath(("//a[@class='popup_menu_item tight']")));
+    ElementsList languageList = new ElementsList(By.xpath("//a[@class='popup_menu_item tight']"));
 
     public HashMap<String,String> langList(){
         langMap.put("Русский", "src/test/resources/locale_properties/ru_properties.properties");
@@ -45,7 +45,7 @@ public class HomePage extends BasePage {
 
     public boolean searchChosenLanguage(String lang){
             boolean bool = false;
-            for(WebElement element : languageList){
+            for(WebElement element : languageList.getElementList()){
                 if (element.getText().startsWith(lang)){
                     bool = true;
                     break;

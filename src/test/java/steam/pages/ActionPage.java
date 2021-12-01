@@ -1,6 +1,7 @@
 package steam.pages;
 
 import framework.BasePage;
+import framework.elements.ElementsList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -10,7 +11,7 @@ public class ActionPage extends BasePage {
 
     public static String comparableSaleValue;
 
-    List<WebElement> recommendedSpecialsList = findElementsList(By.xpath("//div[@class='contenthub_specials_grid_cell']//div[@class='discount_pct']"));
+    ElementsList recommendedSpecialsList = new ElementsList(By.xpath("//div[@class='contenthub_specials_grid_cell']//div[@class='discount_pct']"));
 
     @Override
     public void isRightPageOpenedAssertion(String currentTitle) {
@@ -20,13 +21,13 @@ public class ActionPage extends BasePage {
     public void lookingForBiggestSale(){
         int maxSaleInd = 0;
         int maxSale = 0;
-        for (int i = 0; i < recommendedSpecialsList.size(); i++){
-            if(Integer.parseInt(recommendedSpecialsList.get(i).getText().replace("%", "")) <= maxSale){
-                maxSale = Integer.parseInt(recommendedSpecialsList.get(i).getText().replace("%", ""));
+        for (int i = 0; i < recommendedSpecialsList.getElementList().size(); i++){
+            if(Integer.parseInt(recommendedSpecialsList.getElementList().get(i).getText().replace("%", "")) <= maxSale){
+                maxSale = Integer.parseInt(recommendedSpecialsList.getElementList().get(i).getText().replace("%", ""));
                 maxSaleInd = i;
             }
         }
-        comparableSaleValue = recommendedSpecialsList.get(maxSaleInd).getText();
-        recommendedSpecialsList.get(maxSaleInd).click();
+        comparableSaleValue = recommendedSpecialsList.getElementList().get(maxSaleInd).getText();
+        recommendedSpecialsList.getElementList().get(maxSaleInd).click();
     }
 }

@@ -26,12 +26,12 @@ public class SteamDownload extends BasePage {
 
     public void waitForDownload() {
         switch (BrowserFactory.browser) {
-            case "chrome" -> {
+            case "chrome": {
                 Browser currentBrowser = new Browser();
                 currentBrowser.get("chrome://downloads");
                 waitForProgress();
             }
-            case "firefox" -> {
+            case "firefox": {
                 waitForSize();
             }
         }
