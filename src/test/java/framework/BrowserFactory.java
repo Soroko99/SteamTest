@@ -17,8 +17,7 @@ public class BrowserFactory{
     public static WebDriver createDriver(){
         WebDriver driver = null;
         PropertyManager propertyManager = new PropertyManager();
-        //browser = propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "browser");
-        browser = System.getenv("browser");
+        browser = System.getenv().getOrDefault("browser", propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "browser"));
         switch (browser) {
             case "chrome" : {
                 HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
