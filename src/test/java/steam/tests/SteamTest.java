@@ -17,7 +17,7 @@ public class SteamTest extends BaseTest {
     }
 
     @Test(description = "Download Steam after some page activities")
-    public void start() {
+    public void steamDownloadCheck() {
         PropertyManager propertyManager = new PropertyManager();
 
         HomePage homePage = new HomePage();
