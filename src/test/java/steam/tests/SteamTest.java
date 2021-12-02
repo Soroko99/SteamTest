@@ -25,8 +25,8 @@ public class SteamTest extends BaseTest {
         homePage.isRightPageOpenedAssertion(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "home_title"));
 
         MainMenu mainMenu = new MainMenu();
-        mainMenu.mainMenuNavigation(mainMenu.mainLabel(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "main_page_top_navigation")),
-                mainMenu.subsectionChoice(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "main_page_top_nav_subsection")));
+        mainMenu.mainMenuNavigation(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "main_page_top_navigation"),
+                propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "main_page_top_nav_subsection"));
 
         ActionPage actionPage = new ActionPage();
         actionPage.isRightPageOpenedAssertion(propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "action_title"));
