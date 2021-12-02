@@ -16,7 +16,7 @@ public class ActionPage extends BasePage {
         Assert.assertEquals(getTitle(), currentTitle);
     }
 
-    @Step("Choose the biggest profit")
+    @Step("Choose the best offer")
     public void lookingForBiggestSale(){
         int maxSaleInd = 0;
         int maxSale = 0;
