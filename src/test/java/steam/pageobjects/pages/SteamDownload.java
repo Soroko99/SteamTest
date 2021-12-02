@@ -22,7 +22,7 @@ public class SteamDownload extends BasePage {
 
     @Override
     public void isRightPageOpenedAssertion(String currentValue) {
-        Assert.assertEquals(driver.getTitle(), currentValue);
+        Assert.assertEquals(getTitle(), currentValue);
     }
 
     public void waitForDownload() {
@@ -94,7 +94,7 @@ public class SteamDownload extends BasePage {
         }
     }
 
-    @Step("Clicking download button")
+    @Step("Click download button")
     public void downloadSteam(String downloadSteamBtnText){
         Button downloadSteamBtn = new Button(By.xpath(String.format("//a[text()='%s']", downloadSteamBtnText)));
         downloadSteamBtn.click();

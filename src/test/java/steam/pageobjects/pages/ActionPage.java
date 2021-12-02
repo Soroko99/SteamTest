@@ -13,7 +13,7 @@ public class ActionPage extends BasePage {
 
     @Override
     public void isRightPageOpenedAssertion(String currentTitle) {
-        Assert.assertEquals(driver.getTitle(), currentTitle);
+        Assert.assertEquals(getTitle(), currentTitle);
     }
 
     @Step("Choose the biggest profit")

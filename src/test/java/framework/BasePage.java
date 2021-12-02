@@ -18,7 +18,7 @@ public abstract class BasePage{
         wait.until(expectedConditions);
     }
 
-    public List<WebElement> findElementsList(By locator){
-        return driver.findElements(locator);
+    public String getTitle(){
+        return driver.getTitle();
     }
 }

@@ -1,6 +1,7 @@
 package framework.elements;
 
 import framework.Browser;
+import framework.PropertyManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ public class BaseElement{
     By locator;
     WebElement element;
     List<WebElement> elementList;
+    PropertyManager propertyManager = new PropertyManager();
 
     public BaseElement(By locator){
         this.locator = locator;
@@ -48,11 +50,11 @@ public class BaseElement{
     public void moveTo(){
         Actions actions = new Actions(driver);
         waitUntilPresent();
-        actions.moveToElement(driver.findElement(locator)).build().perform();
+        actions.moveToElement(getElement()).build().perform();
     }
 
     public String getText(){
-        return driver.findElement(locator).getText();
+        return getElement().getText();
     }
 
     private boolean arePresent() {
@@ -78,7 +80,7 @@ public class BaseElement{
             return false;
         }
         try {
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "implicit_wait")), TimeUnit.SECONDS);
             return element.isDisplayed();
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,7 +107,7 @@ public class BaseElement{
             }
             });
         try {
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(Integer.parseInt(propertyManager.getExactProperty(PropertyManager.seleniumPropertyPath, "implicit_wait")), TimeUnit.SECONDS);
             return element.isDisplayed();
         } catch (Exception e) {
             e.printStackTrace();

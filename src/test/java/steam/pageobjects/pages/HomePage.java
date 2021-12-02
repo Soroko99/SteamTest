@@ -59,7 +59,7 @@ public class HomePage extends BasePage {
     public void isRightPageOpenedAssertion(String currentTitle) {
         waitUntilExpectedConditions(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format("//a[@class='pulldown_desktop'][contains(text(), '%s')]",
                 propertyManager.getExactProperty(HomePage.currentLanguagePropertyPath, "main_page_top_navigation")))));
-        Assert.assertEquals(driver.getTitle(), currentTitle);
+        Assert.assertEquals(getTitle(), currentTitle);
     }
 
 
