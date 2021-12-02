@@ -1,4 +1,4 @@
-package steam.pages;
+package steam.pageobjects.pages;
 
 import framework.elements.Button;
 import framework.elements.Dropdown;

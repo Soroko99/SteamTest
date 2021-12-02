@@ -4,8 +4,8 @@ import framework.BaseTest;
 import framework.PropertyManager;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import steam.main_menu.MainMenu;
-import steam.pages.*;
+import steam.pageobjects.menu.MainMenu;
+import steam.pageobjects.pages.*;
 
 public class SteamTest extends BaseTest {
 

@@ -1,4 +1,4 @@
-package steam.pages;
+package steam.pageobjects.pages;
 
 import framework.BasePage;
 import framework.Browser;

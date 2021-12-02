@@ -1,4 +1,4 @@
-package steam.main_menu;
+package steam.pageobjects.menu;
 
 import framework.elements.Dropdown;
 import framework.elements.Label;

@@ -1,7 +1,6 @@
 package framework.elements;
 
 import framework.Browser;
-import framework.PropertyManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -35,14 +33,6 @@ public class BaseElement{
             ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='3px solid red'", element);
         }
         element.click();
-    }
-
-    public void clickViaJS() {
-        waitUntilPresent();
-        if (driver instanceof JavascriptExecutor) {
-            ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='3px solid blue'", element);
-        }
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     public List<WebElement> getElementList(){
