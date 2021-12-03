@@ -20,7 +20,7 @@ public class HomePage extends BasePage {
     Dropdown languageList = new Dropdown(By.xpath("//a[@class='popup_menu_item tight']"));
 
     public HashMap<String,String> langList(){
-        langMap.put("Русский", "src/test/resources/locale_properties/ru_propertes.properties");
+        langMap.put("Русский", "src/test/resources/locale_properties/ru_properties.properties");
         langMap.put("English", "src/test/resources/locale_properties/eng_properties.properties");
         return langMap;
     }
